@@ -1,0 +1,21 @@
+# Change directory to your internal drive (usually named Macintosh HD)
+cd /Volumes/Macintosh\ HD
+
+# Download the macOS Sierra 10.12.6 InstallOS.dmg from Apple's server
+curl http://updates-http.cdn-apple.com/2019/cert/061-39476-20191023-48f365f4-0015-4c41-9f44-39d3d2aca067/InstallOS.dmg -o InstallOS.dmg
+# Or download macOS Sequoia: 
+curl https://download2277.mediafire.com/9fn08dic08rgqQdXtFniU1CSfT0vl12VlAAzHQnc00XOSyJtnJ0wsEvjRUcdrHUnsCp-NfaR2HmPD6HuLd7HQy67oEFvZNcKPMIe93VGriueweJBXMC0LL3g1lU7ghY1npJPY2vJT2gCovkfBsDR66z5AnPBR0fNEf9U1a0SEssCUxo/zzrt61mq98pw24t/macOS+Sequoia+DMG+by+techrechard.com.dmg -o InstallOS.dmg
+# Or Monterey:
+curl https://swcdn.apple.com/content/downloads/34/21/062-40406-A_GZQ27OUQER/ggclib72ow1omcvfexvp84bc9x5ei5tyqu/InstallAssistant.pkg -o InstallOS.pkg
+# Search this site for more versions: https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
+
+# Mount the InstallOS.dmg file
+hdiutil attach InstallOS.dmg
+# If error: hdiutil: attach failed - invalid checksum
+defaults write com.apple.frameworks.diskimages skip-verify true
+
+# Install the macOS Sierra installer from the mounted DMG
+installer -pkg /Volumes/Install\ macOS/InstallOS.pkg -target /Volumes/Macintosh\ HD
+
+# Run the macOS Sierra installer
+/Volumes/Macintosh\ HD/Applications/Install\ macOS\ Sierra.app/Contents/MacOS/InstallAssistant_springboard
